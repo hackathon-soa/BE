@@ -56,5 +56,4 @@ public class ParticipationController {
         return ApiResponse.onSuccess();
     }
 
-
 }
