@@ -28,6 +28,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 코스 관련
     NOT_FOUND_COURSE(HttpStatus.NOT_FOUND, "H001", "코스를 찾을 수 없습니다."),
+    NOT_FOUND_SEGMENT(HttpStatus.NOT_FOUND, "H002", "세그먼트를 찾을 수 없습니다."),
+
     ;
 
     private final HttpStatus httpStatus;
