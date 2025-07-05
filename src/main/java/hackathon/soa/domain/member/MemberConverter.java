@@ -19,7 +19,7 @@ public class MemberConverter {
                 .birth(request.getBirth())
                 .gender(gender)
                 .disabilityType(request.getDisabilityType())
-                .profileImageUrl("https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit1.png")
+                .profileImageUrl("https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/profile_image.png")
                 .mileage(0)
                 .build();
     }
