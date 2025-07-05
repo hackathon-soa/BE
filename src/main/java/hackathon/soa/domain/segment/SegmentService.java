@@ -3,7 +3,7 @@ package hackathon.soa.domain.segment;
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.CourseHandler;
 import hackathon.soa.common.apiPayload.exception.SegmentHandler;
-import hackathon.soa.domain.course.CourseRepository;
+import hackathon.soa.domain.course.repository.CourseRepository;
 import hackathon.soa.domain.segment.dto.SegmentResponseDTO;
 import hackathon.soa.domain.segment.repository.CourseSegmentRepository;
 import hackathon.soa.domain.segment.repository.MoveSegmentRepository;
@@ -41,7 +41,7 @@ public class SegmentService {
 
         boolean isOwner = course.getMember().getId().equals(memberId);
 
-        // 2. 코스 세그먼트들을 순서대로 조회
+        // 2. 코스 세그먼트들을 순서대로 조회함
         List<CourseSegment> courseSegments = courseSegmentRepository.findByCourse_IdOrderBySegmentOrder(courseId);
 
         if (courseSegments.isEmpty()) {

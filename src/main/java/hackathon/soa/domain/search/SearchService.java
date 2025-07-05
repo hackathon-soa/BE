@@ -2,7 +2,7 @@ package hackathon.soa.domain.search;
 
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.GeneralException;
-import hackathon.soa.domain.course.CourseRepository;
+import hackathon.soa.domain.course.repository.CourseRepository;
 import hackathon.soa.domain.likes.LikesRepository;
 import hackathon.soa.domain.member.MemberRepository;
 import hackathon.soa.domain.search.dto.SearchResponseDTO;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
