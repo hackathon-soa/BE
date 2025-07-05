@@ -23,5 +23,3 @@ public class Uuid extends BaseEntity {
                 .build();
     }
 }
-
-
