@@ -35,6 +35,7 @@ public class Course extends BaseEntity {
     private String specialNote;
 
     @Column(nullable = false, name = "preferred_gender", columnDefinition = "varchar(100)")
+    @Enumerated(EnumType.STRING)
     private Gender preferredGender;
 
     @Column(nullable = false, name = "status", columnDefinition = "varchar(100)")
@@ -52,9 +53,5 @@ public class Course extends BaseEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CourseSegment> courseSegments = new ArrayList<>();
-
 
 }

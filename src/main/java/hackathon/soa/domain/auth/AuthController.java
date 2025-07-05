@@ -29,7 +29,6 @@ public class AuthController {
     }
 
 
-
     @GetMapping("/check")
     @Operation(
             summary = "아이디 중복 확인",
@@ -43,6 +42,19 @@ public class AuthController {
                 .build();
 
         AuthResponseDTO.DuplicateCheckResponseDTO result = authService.checkDuplicate(request);
+        return ApiResponse.onSuccess(result);
+    }
+
+
+    @PostMapping("/login")
+    @Operation(
+            summary = "로그인",
+            description = "아이디와 비밀번호로 로그인하여 액세스 토큰을 발급받습니다."
+    )
+    public ApiResponse<AuthResponseDTO.LoginResponseDTO> login(
+            @RequestBody @Valid AuthRequestDTO.LoginRequestDTO request
+    ) {
+        AuthResponseDTO.LoginResponseDTO result = authService.login(request);
         return ApiResponse.onSuccess(result);
     }
 }

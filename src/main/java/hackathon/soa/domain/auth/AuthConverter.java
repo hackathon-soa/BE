@@ -18,4 +18,12 @@ public class AuthConverter {
                 .message(isExists ? "이미 사용중인 아이디입니다." : "사용가능한 아이디입니다.")
                 .build();
     }
+
+
+    public static AuthResponseDTO.LoginResponseDTO toLoginResponseDTO(Member member, String accessToken) {
+        return AuthResponseDTO.LoginResponseDTO.builder()
+                .memberId(member.getId())
+                .accessToken(accessToken)
+                .build();
+    }
 }
