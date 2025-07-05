@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.swing.plaf.synth.Region;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("select count(l) from Likes l where l.course.id = :courseId")
     int countLikesByCourseId(@Param("courseId") Long courseId);
+
+    List<Course> findAllByRegion(String region);
 }
