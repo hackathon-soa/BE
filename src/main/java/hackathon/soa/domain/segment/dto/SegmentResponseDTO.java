@@ -1,5 +1,7 @@
 package hackathon.soa.domain.segment.dto;
 
+import hackathon.soa.domain.search.dto.SearchResponseDTO;
+import hackathon.soa.entity.CourseSegment;
 import hackathon.soa.entity.MoveSegment;
 import hackathon.soa.entity.MovementType;
 import hackathon.soa.entity.StaySegment;
@@ -9,7 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+
+import static hackathon.soa.domain.segment.SegmentConverter.toMoveSegmentDTO;
 
 public class SegmentResponseDTO {
 
@@ -19,7 +25,8 @@ public class SegmentResponseDTO {
     @AllArgsConstructor
     public static class CourseDetailResponseDTO {
         private Long courseId;
-        private Boolean isOwner; // 해당 멤버가 코스 작성자인지 여부
+        private Boolean isMine; // 해당 멤버가 코스 작성자인지 여부
+        private SearchResponseDTO.SearchCourseResponseDTO courseInfo; // 코스 기본 정보 및 좋아요 정보
         private List<SegmentDetailDTO> segments;
     }
 
@@ -45,12 +52,14 @@ public class SegmentResponseDTO {
         private Long segmentId;
         private String locationName;
         private String locationAddress;
+        private Boolean isParticipated; // 현재 사용자의 참여 여부
 
-        public static StaySegmentDTO from(StaySegment staySegment) {
+        public static StaySegmentDTO from(StaySegment staySegment, Boolean isParticipated) {
             return StaySegmentDTO.builder()
                     .segmentId(staySegment.getSegmentId())
                     .locationName(staySegment.getLocationName())
                     .locationAddress(staySegment.getLocationAddress())
+                    .isParticipated(isParticipated)
                     .build();
         }
     }
@@ -71,5 +80,40 @@ public class SegmentResponseDTO {
                     .movementDistanceKm(BigDecimal.valueOf(moveSegment.getMovementDistanceKm()))
                     .build();
         }
+    }
+
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyCourseDetailResponseDTO {
+        private Long courseId;
+        private List<MySegmentDetailDTO> segments;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MySegmentDetailDTO {
+        private Integer segmentOrder;
+        private String segmentType; // "장소" or "이동"
+        private String date; // "07/05(토)"
+        private String startTime; // "09:00"
+        private String endTime; // "09:30"
+        private MyStaySegmentDTO staySegment;
+        private MoveSegmentDTO moveSegment;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyStaySegmentDTO {
+        private Long segmentId;
+        private String locationName;
+        private String locationAddress;
+        private String mateStatus; // "모집 중", "신청확인", "신청확정"
     }
 }

@@ -27,9 +27,9 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER4001", "존재하지 않는 사용자입니다."),
 
     // 코스 관련
-    NOT_FOUND_COURSE(HttpStatus.NOT_FOUND, "H001", "코스를 찾을 수 없습니다."),
-    NOT_FOUND_SEGMENT(HttpStatus.NOT_FOUND, "H002", "세그먼트를 찾을 수 없습니다."),
-
+    NOT_FOUND_COURSE(HttpStatus.NOT_FOUND, "COURSE4001", "코스를 찾을 수 없습니다."),
+    NOT_FOUND_SEGMENT(HttpStatus.NOT_FOUND, "COURSE4002", "세그먼트를 찾을 수 없습니다."),
+    UNAUTHORIZED_COURSE_ACCESS(HttpStatus.FORBIDDEN, "COURSE4003", "해당 코스에 접근할 권한이 없습니다."),
 
 
     // 세그먼트 관련
