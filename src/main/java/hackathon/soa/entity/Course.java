@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "member")
+@Table(name = "course")
 @NoArgsConstructor
 @Getter
 @Builder
@@ -48,6 +48,6 @@ public class Course extends BaseEntity {
     private LocalDateTime endTime;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
 }
