@@ -1,6 +1,5 @@
 package hackathon.soa.domain.test;
 
-import hackathon.soa.common.apiPayload.exception.TempHandler;
 import hackathon.soa.config.AmazonConfig;
 import hackathon.soa.domain.s3.AmazonS3Manager;
 import lombok.RequiredArgsConstructor;
