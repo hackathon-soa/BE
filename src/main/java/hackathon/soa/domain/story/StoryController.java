@@ -4,29 +4,36 @@ import hackathon.soa.common.apiPayload.ApiResponse;
 import hackathon.soa.domain.story.dto.StoryRequestDTO;
 import hackathon.soa.domain.story.dto.StoryResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Tag(name = "Story", description = "스토리 관련 API")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/stories")
+@RequiredArgsConstructor
 public class StoryController {
 
     private final StoryService storyService;
 
+    @Operation(
+            summary = "스토리 이미지 업로드",
+            description = "memberId와 MultipartFile 이미지를 받아 S3(stories/)에 저장 후 URL을 반환합니다."
+    )
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "스토리 추가", description = "회원 ID와 이미지를 받아 스토리를 등록합니다.")
     public ApiResponse<StoryResponseDTO.UploadResult> uploadStory(
-            @RequestPart("image") MultipartFile image,
-            @RequestPart("memberId") Long memberId
-    ) {
-        StoryRequestDTO.UploadRequest request = StoryRequestDTO.UploadRequest.builder()
-                .memberId(memberId)
-                .image(image)
-                .build();
+            @Parameter(description = "스토리 작성자 ID", required = true)
+            @RequestPart("request") StoryRequestDTO.UploadRequest request,
 
-        return ApiResponse.onSuccess(storyService.uploadStory(request));
+            @Parameter(description = "업로드할 이미지 파일", required = true)
+            @RequestPart("image") MultipartFile image) {
+
+        // 🚩 필요하다면 memberId로 회원 존재 여부 등을 체크
+        String url = storyService.uploadStoryImage(image);
+
+        return ApiResponse.onSuccess(StoryConverter.toUploadResult(url));
     }
 }
