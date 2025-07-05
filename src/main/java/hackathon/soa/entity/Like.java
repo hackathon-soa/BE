@@ -1,4 +1,4 @@
-package hackathon.soa.domain.entity;
+package hackathon.soa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,23 +7,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "course_travel_style")
+@Table(name = "course_segment")
 @NoArgsConstructor
 @Getter
 @Builder
 @AllArgsConstructor
-public class CourseTravelStyle extends BaseEntity {
+public class Like extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "travel_style_id")
-    private TravelStyle travelStyle;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
-
 }

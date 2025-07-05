@@ -1,11 +1,10 @@
-package hackathon.soa.domain.entity;
+package hackathon.soa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Auditable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -73,4 +72,11 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "targetMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TemperatureMapping> temperaturesReceived = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+
 }
