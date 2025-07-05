@@ -29,5 +29,5 @@ public class MoveSegment extends BaseEntity {
     private MovementType movementType;
 
     @Column(nullable = false, name = "movement_distance_km", columnDefinition = "double")
-    private DecimalFormat movementDistanceKm;
+    private Double movementDistanceKm;
 }

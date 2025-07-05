@@ -30,6 +30,12 @@ public enum ErrorStatus implements BaseErrorCode {
     NOT_FOUND_COURSE(HttpStatus.NOT_FOUND, "H001", "코스를 찾을 수 없습니다."),
     NOT_FOUND_SEGMENT(HttpStatus.NOT_FOUND, "H002", "세그먼트를 찾을 수 없습니다."),
 
+
+
+    // 세그먼트 관련
+    SEGMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "SEGMENT4001", "세그먼트를 찾을 수 없습니다."),
+    SEGMENT_DESERIALIZATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "SEGMENT4002", "세그먼트 데이터 처리 중 오류가 발생했습니다."),
+
     ;
 
     private final HttpStatus httpStatus;
