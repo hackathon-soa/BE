@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.swing.plaf.synth.Region;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +20,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     int countLikesByCourseId(@Param("courseId") Long courseId);
 
     List<Course> findAllByRegion(String region);
+
+    @Query("select c from Course c where :targetDate between c.startTime and c.endTime")
+    List<Course> findAllByDateBetween(@Param("targetDate") LocalDateTime targetDate);
 }
