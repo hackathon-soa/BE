@@ -28,5 +28,18 @@ public class ParticipationController {
         return ApiResponse.onSuccess();
     }
 
+    @PostMapping("/courses/{courseId}/register")
+    @Operation(
+            summary = "여행 전체에 동행 신청하기 api",
+            description = "여행 코스 전체에 동행을 신청하는 api입니다."
+    )
+    public ApiResponse<?> registerEntireSegment (
+            @Parameter(hidden = true) @JwtUser Long memberId,
+            @PathVariable Long courseId
+    ) {
+        participationService.registerEntireSegment(memberId, courseId);
+        return ApiResponse.onSuccess();
+    }
+
 
 }
