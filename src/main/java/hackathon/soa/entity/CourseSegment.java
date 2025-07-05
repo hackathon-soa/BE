@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "course_segment")
@@ -32,4 +34,8 @@ public class CourseSegment extends BaseEntity {
 
     @Column(nullable = false, name = "end_time", columnDefinition = "datetime")
     private LocalDateTime endTime;
+
+    @OneToMany(mappedBy = "courseSegment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
+
 }
