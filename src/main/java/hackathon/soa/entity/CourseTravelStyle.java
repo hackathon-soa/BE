@@ -27,3 +27,4 @@ public class CourseTravelStyle extends BaseEntity {
     private Course course;
 
 }
+
