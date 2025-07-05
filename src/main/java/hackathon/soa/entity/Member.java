@@ -72,4 +72,11 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "targetMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TemperatureMapping> temperaturesReceived = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+
 }

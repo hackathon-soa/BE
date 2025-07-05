@@ -24,5 +24,5 @@ public class TravelStyle extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "travelStyle", cascade = CascadeType.ALL)
-    private List<TravelStyle> travelStyles = new ArrayList<>();
+    private List<CourseTravelStyle> courseTravelStyles = new ArrayList<>();
 }
