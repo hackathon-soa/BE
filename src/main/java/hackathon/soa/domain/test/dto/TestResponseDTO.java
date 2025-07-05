@@ -14,4 +14,18 @@ public class TestResponseDTO {
     public static class TestDTO{
         String testString;
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class ImageUploadResultDTO {
+        private String imageUrl;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ExceptionDTO{
+        Integer flag;
+    }
 }
