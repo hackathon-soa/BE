@@ -31,11 +31,11 @@ public class CoursePlaceSearchService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Naver-Client-Id", clientId);
         headers.set("X-Naver-Client-Secret", clientSecret);
-        headers.set("User-Agent", "Mozilla/5.0"); // ✅ User-Agent도 추가
+        headers.set("User-Agent", "Mozilla/5.0"); // User-Agent도 추가
 
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-        // ✅ 실제 디버깅용: 원시 응답 출력
+        // 실제 디버깅용: 원시 응답 출력
         ResponseEntity<String> debugResponse = restTemplate.exchange(
                 apiUrl,
                 HttpMethod.GET,
@@ -46,7 +46,7 @@ public class CoursePlaceSearchService {
         System.out.println("✅ Client ID: " + clientId);
         System.out.println("✅ 네이버 원시 응답: " + debugResponse.getBody());
 
-        // ✅ 실사용 로직: DTO 매핑용
+        // 실사용 로직: DTO 매핑용
         ResponseEntity<NaverLocalResponse> response = restTemplate.exchange(
                 apiUrl,
                 HttpMethod.GET,
@@ -55,7 +55,7 @@ public class CoursePlaceSearchService {
         );
 
         if (response.getBody() == null || response.getBody().getItems() == null) {
-            System.out.println("⚠️ 응답이 null이거나 items 없음");
+            System.out.println("응답이 null이거나 items 없음");
             return List.of("검색 결과가 없습니다.");
         }
 

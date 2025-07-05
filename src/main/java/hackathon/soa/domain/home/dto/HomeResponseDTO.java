@@ -1,6 +1,5 @@
 package hackathon.soa.domain.home.dto;
 
-import hackathon.soa.entity.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
