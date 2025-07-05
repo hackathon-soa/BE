@@ -33,4 +33,17 @@ public class SegmentController {
         SegmentResponseDTO.CourseDetailResponseDTO result = segmentService.getCourseDetail(courseId, memberId);
         return ApiResponse.onSuccess(result);
     }
+
+    @GetMapping("/my/{courseId}")
+    @Operation(
+            summary = "나의 특정 코스 상세 조회",
+            description = "코스 ID로 특정 코스의 세그먼트들의 정보를 조회합니다. (내꺼)"
+    )
+    public ApiResponse<SegmentResponseDTO.MyCourseDetailResponseDTO> getMyCourseDetail(
+            @PathVariable Long courseId,
+            @Parameter(hidden = true) @JwtUser Long memberId
+    ) {
+        SegmentResponseDTO.MyCourseDetailResponseDTO result = segmentService.getMyCourseDetail(courseId, memberId);
+        return ApiResponse.onSuccess(result);
+    }
 }

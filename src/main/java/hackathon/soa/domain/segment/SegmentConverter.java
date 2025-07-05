@@ -64,4 +64,46 @@ public class SegmentConverter {
                 .movementDistanceKm(BigDecimal.valueOf(moveSegment.getMovementDistanceKm()))
                 .build();
     }
+
+
+    public static SegmentResponseDTO.MyCourseDetailResponseDTO toMyCourseDetailResponseDTO(
+            Long courseId,
+            List<SegmentResponseDTO.MySegmentDetailDTO> segments) {
+        return SegmentResponseDTO.MyCourseDetailResponseDTO.builder()
+                .courseId(courseId)
+                .segments(segments)
+                .build();
+    }
+
+    public static SegmentResponseDTO.MySegmentDetailDTO toMySegmentDetailDTO(
+            CourseSegment courseSegment,
+            StaySegment staySegment,
+            MoveSegment moveSegment,
+            String mateStatus) {
+
+        // 시간 포맷터 정의
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd(E)", Locale.KOREAN);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String segmentType = (staySegment != null) ? "장소" : "이동";
+
+        return SegmentResponseDTO.MySegmentDetailDTO.builder()
+                .segmentOrder(courseSegment.getSegmentOrder())
+                .segmentType(segmentType)
+                .date(courseSegment.getStartTime().format(dateFormatter))
+                .startTime(courseSegment.getStartTime().format(timeFormatter))
+                .endTime(courseSegment.getEndTime().format(timeFormatter))
+                .staySegment(staySegment != null ? toMyStaySegmentDTO(staySegment, mateStatus) : null)
+                .moveSegment(moveSegment != null ? toMoveSegmentDTO(moveSegment) : null)
+                .build();
+    }
+
+    public static SegmentResponseDTO.MyStaySegmentDTO toMyStaySegmentDTO(StaySegment staySegment, String mateStatus) {
+        return SegmentResponseDTO.MyStaySegmentDTO.builder()
+                .segmentId(staySegment.getSegmentId())
+                .locationName(staySegment.getLocationName())
+                .locationAddress(staySegment.getLocationAddress())
+                .mateStatus(mateStatus)
+                .build();
+    }
 }
