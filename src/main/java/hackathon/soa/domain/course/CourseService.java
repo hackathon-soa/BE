@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -85,4 +87,9 @@ public class CourseService {
         return course.getId();
     }
 
+    private final CoursePlaceSearchService coursePlaceSearchService;
+
+    public List<String> searchPlace(String query) {
+        return coursePlaceSearchService.search(query);
+    }
 }
