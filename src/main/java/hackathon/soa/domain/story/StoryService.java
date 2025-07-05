@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
+
 @Service
 @RequiredArgsConstructor
 public class StoryService {
@@ -17,6 +18,7 @@ public class StoryService {
     private final AmazonS3Manager amazonS3Manager;
     private final AmazonConfig amazonConfig;
 
+    //스토리 업로드 메소드
     public StoryResponseDTO.UploadResult uploadStory(StoryRequestDTO.UploadRequest request) {
         MultipartFile image = request.getImage();
         Long memberId = request.getMemberId();
