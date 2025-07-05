@@ -1,11 +1,10 @@
-package hackathon.soa.domain.entity;
+package hackathon.soa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Auditable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
