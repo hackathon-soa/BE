@@ -8,10 +8,8 @@ import lombok.NoArgsConstructor;
 public class StoryResponseDTO {
 
     @Getter
-    @Builder
-    @NoArgsConstructor
     @AllArgsConstructor
-    public static class UploadResult {
+    public static class ImageUploadResultDTO {
         private String imageUrl;
     }
 }

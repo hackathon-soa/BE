@@ -3,7 +3,6 @@ package hackathon.soa.domain.story;
 import hackathon.soa.config.AmazonConfig;
 import hackathon.soa.domain.s3.AmazonS3Manager;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,31 +13,19 @@ import java.util.UUID;
 public class StoryService {
 
     private final AmazonS3Manager amazonS3Manager;
-    private final AmazonConfig amazonConfig;   // testsPath와 비슷하게 storiesPath를 yml에 정의했다고 가정
+    private final AmazonConfig amazonConfig;
 
-    /**
-     * S3에 스토리 이미지를 업로드 후 URL 반환
-     */
-    public String uploadStoryImage(MultipartFile image) {
-        validateImage(image);
+    public String uploadTestImage(MultipartFile image) {
+        // 파일명을 고유하게 생성: 예) tests/uuid.jpg
+        String keyName = generateTestImageKeyName(image.getOriginalFilename());
 
-        String keyName = generateStoryKeyName(image.getOriginalFilename());
+        // S3에 업로드 및 URL 반환
         return amazonS3Manager.uploadFile(keyName, image);
     }
 
-    /* ---------- private ---------- */
-
-    private void validateImage(MultipartFile image) {
-        if (image == null || image.isEmpty()) {
-            throw new IllegalArgumentException("업로드할 이미지가 없습니다.");
-        }
+    private String generateTestImageKeyName(String originalFileName) {
+        String ext = originalFileName.substring(originalFileName.lastIndexOf(".")); // .jpg, .png 등
+        return amazonConfig.getTestsPath() + "/" + UUID.randomUUID() + ext; // tests/uuid.jpg
     }
 
-    private String generateStoryKeyName(String originalFileName) {
-        String ext = FilenameUtils.getExtension(originalFileName);   // commons-io
-        return String.format("%s/%s.%s",
-                amazonConfig.getStoriesPath(),   // 예) "stories"
-                UUID.randomUUID(),
-                ext.toLowerCase());
-    }
 }

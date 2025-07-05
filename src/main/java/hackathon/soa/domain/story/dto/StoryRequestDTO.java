@@ -4,13 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
-/**
- * Story 업로드 요청 DTO
- *  - multipart/form-data 전송 시
- *    ├─ image   : MultipartFile  (컨트롤러 @RequestPart)
- *    └─ request : JSON           (memberId만 포함)
- */
 public class StoryRequestDTO {
 
     @Getter
@@ -18,6 +13,7 @@ public class StoryRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UploadRequest {
-        private Long memberId;
+        private Long memberId;               // 회원 ID
+        private MultipartFile image;         // 업로드할 이미지
     }
 }

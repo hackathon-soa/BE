@@ -26,13 +26,13 @@ public class TestController {
         return ApiResponse.onSuccess(TestConverter.toTempTestDTO());
     }
 
-    @Operation(summary = "테스트용 이미지 업로드", description = "MultipartFile로 전달된 이미지를 S3의 tests 디렉토리에 업로드하고 URL을 반환합니다.")
-    @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<String> uploadImage(
-            @Parameter(description = "업로드할 이미지 파일", required = true)
-            @RequestPart("image") MultipartFile image) {
-
-        String url = testService.uploadTestImage(image);
-        return ApiResponse.onSuccess(url);
-    }
+//    @Operation(summary = "테스트용 이미지 업로드", description = "MultipartFile로 전달된 이미지를 S3의 tests 디렉토리에 업로드하고 URL을 반환합니다.")
+//    @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ApiResponse<String> uploadImage(
+//            @Parameter(description = "업로드할 이미지 파일", required = true)
+//            @RequestPart("image") MultipartFile image) {
+//
+//        String url = testService.uploadTestImage(image);
+//        return ApiResponse.onSuccess(url);
+//    }
 }
