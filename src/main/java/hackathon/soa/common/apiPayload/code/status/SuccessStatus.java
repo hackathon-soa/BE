@@ -1,7 +1,7 @@
-package common.apiPayload.code.status;
+package hackathon.soa.common.apiPayload.code.status;
 
-import common.apiPayload.code.BaseCode;
-import common.apiPayload.code.ReasonDTO;
+import hackathon.soa.common.apiPayload.code.BaseCode;
+import hackathon.soa.common.apiPayload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

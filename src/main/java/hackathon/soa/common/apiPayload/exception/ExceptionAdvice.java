@@ -1,8 +1,8 @@
-package common.apiPayload.exception;
+package hackathon.soa.common.apiPayload.exception;
 
-import common.apiPayload.ApiResponse;
-import common.apiPayload.code.ErrorReasonDTO;
-import common.apiPayload.code.status.ErrorStatus;
+import hackathon.soa.common.apiPayload.ApiResponse;
+import hackathon.soa.common.apiPayload.code.ErrorReasonDTO;
+import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
-package common.apiPayload.exception;
+package hackathon.soa.common.apiPayload.exception;
 
-import common.apiPayload.code.BaseErrorCode;
-import common.apiPayload.code.ErrorReasonDTO;
+import hackathon.soa.common.apiPayload.code.BaseErrorCode;
+import hackathon.soa.common.apiPayload.code.ErrorReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

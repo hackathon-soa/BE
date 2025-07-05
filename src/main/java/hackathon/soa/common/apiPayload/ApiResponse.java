@@ -1,10 +1,10 @@
-package common.apiPayload;
+package hackathon.soa.common.apiPayload;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import common.apiPayload.code.BaseCode;
-import common.apiPayload.code.status.SuccessStatus;
+import hackathon.soa.common.apiPayload.code.BaseCode;
+import hackathon.soa.common.apiPayload.code.status.SuccessStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

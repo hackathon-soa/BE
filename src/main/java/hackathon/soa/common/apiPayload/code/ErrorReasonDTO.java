@@ -1,4 +1,4 @@
-package common.apiPayload.code;
+package hackathon.soa.common.apiPayload.code;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;

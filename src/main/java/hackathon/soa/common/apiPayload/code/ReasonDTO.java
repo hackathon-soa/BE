@@ -1,4 +1,4 @@
-package common.apiPayload.code;
+package hackathon.soa.common.apiPayload.code;
 
 import lombok.Builder;
 import lombok.Getter;
