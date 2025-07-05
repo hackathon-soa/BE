@@ -35,7 +35,5 @@ public class CourseSegment extends BaseEntity {
     @Column(nullable = false, name = "end_time", columnDefinition = "datetime")
     private LocalDateTime endTime;
 
-    @OneToMany(mappedBy = "courseSegment", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
 
 }

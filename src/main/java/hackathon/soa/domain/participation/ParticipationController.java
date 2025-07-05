@@ -24,7 +24,7 @@ public class ParticipationController {
             @Parameter(hidden = true) @JwtUser Long memberId,
             @PathVariable Long segmentId
     ) {
-        participationService.registerCourseSegment(memberId, segmentId);
+        participationService.registerStaySegment(memberId, segmentId);
         return ApiResponse.onSuccess();
     }
 
