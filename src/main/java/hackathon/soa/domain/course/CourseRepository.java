@@ -1,4 +1,4 @@
-package hackathon.soa.domain.auth.course;
+package hackathon.soa.domain.course;
 
 import hackathon.soa.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;

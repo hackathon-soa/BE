@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,6 +27,19 @@ public class AuthController {
             @RequestBody @Valid AuthRequestDTO.SignupRequestDTO request
     ) {
         AuthResponseDTO.SignupResponseDTO result = authService.register(request);
+        return ApiResponse.onSuccess(result);
+    }
+
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(
+            summary = "신원인증 이미지 업로드",
+            description = "사용자의 신원정보를 증빙할 수 있는 이미지를 받아서 S3에 업로드합니다."
+    )
+    public ApiResponse<AuthResponseDTO.UploadResponseDTO> upload(
+            @RequestParam Long memberId,
+            MultipartFile file
+            ) {
+        AuthResponseDTO.UploadResponseDTO result = authService.uploadVerification(memberId, file);
         return ApiResponse.onSuccess(result);
     }
 
