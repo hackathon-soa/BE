@@ -51,4 +51,15 @@ public class AuthRequestDTO {
         @NotNull(message = "프로필 이미지는 필수입니다")
         private Integer profileImage;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DuplicateCheckRequestDTO {
+        @NotBlank(message = "아이디는 필수입니다")
+        @Size(min = 4, max = 20, message = "아이디는 4~20자 사이여야 합니다")
+        @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "아이디는 영문자와 숫자만 가능합니다")
+        private String appId;
+    }
 }

@@ -14,4 +14,13 @@ public class AuthResponseDTO {
         private Long userId;
         private String appId;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DuplicateCheckResponseDTO {
+        private Boolean isAvailable;
+        private String message;
+    }
 }

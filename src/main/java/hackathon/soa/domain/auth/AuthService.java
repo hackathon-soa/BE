@@ -39,4 +39,11 @@ public class AuthService {
         // 4) ResponseDTO 변환 Converter 작업
         return AuthConverter.toSignUpResponseDTO(savedMember);
     }
+
+    public AuthResponseDTO.DuplicateCheckResponseDTO checkDuplicate(AuthRequestDTO.DuplicateCheckRequestDTO request) {
+        // 1) 아이디 중복 체크
+        boolean isExists = memberRepository.existsByAppId(request.getAppId());
+
+        return AuthConverter.toDuplicateCheckResponseDTO(isExists);
+    }
 }
