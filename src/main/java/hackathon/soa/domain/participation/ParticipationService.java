@@ -35,4 +35,12 @@ public class ParticipationService {
                         .status(SegmentParticipationStatus.PENDING)
                         .build());
     }
+
+    public void updateStatus(Long participationId, SegmentParticipationStatus status) {
+        SegmentParticipation participation = segmentParticipationRepository.findById(participationId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._INTERNAL_SERVER_ERROR));
+
+        participation.updateStatus(status);
+    }
+
 }

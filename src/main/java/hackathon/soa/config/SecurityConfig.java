@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/api/courses/**").permitAll()
                         .requestMatchers("/api/stories/image").permitAll()
+                        .requestMatchers("/api/participation/segments/*/approve").permitAll()
+                        .requestMatchers("/api/participation/segments/*/reject").permitAll()
                         .anyRequest().authenticated()  // 그 외 모든 요청은 인증 필요
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

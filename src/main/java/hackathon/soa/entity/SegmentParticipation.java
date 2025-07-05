@@ -30,4 +30,8 @@ public class SegmentParticipation extends BaseEntity {
     @Column(nullable = false, name = "course_segment_status", columnDefinition = "varchar(100)")
     private SegmentParticipationStatus status;
 
+    public void updateStatus(SegmentParticipationStatus status) {
+        this.status = status;
+    }
+
 }
