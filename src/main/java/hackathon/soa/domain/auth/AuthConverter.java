@@ -12,6 +12,7 @@ public class AuthConverter {
                 ;
     }
 
+
     public static AuthResponseDTO.DuplicateCheckResponseDTO toDuplicateCheckResponseDTO(boolean isExists) {
         return AuthResponseDTO.DuplicateCheckResponseDTO.builder()
                 .isAvailable(!isExists)
@@ -24,6 +25,14 @@ public class AuthConverter {
         return AuthResponseDTO.LoginResponseDTO.builder()
                 .memberId(member.getId())
                 .accessToken(accessToken)
+                .build();
+    }
+
+
+    public static AuthResponseDTO.UploadResponseDTO toUploadResponseDTO(Member member, String imageUrl) {
+        return AuthResponseDTO.UploadResponseDTO.builder()
+                .userId(member.getId())
+                .verificationImageUrl(imageUrl)
                 .build();
     }
 }

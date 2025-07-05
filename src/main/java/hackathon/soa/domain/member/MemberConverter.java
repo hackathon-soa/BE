@@ -10,28 +10,6 @@ public class MemberConverter {
         // 성별 변환
         Gender gender = "남성".equals(request.getGender()) ? Gender.MALE : Gender.FEMALE;
 
-        // 프로필 이미지 변환
-        String profileImageUrl;
-        switch (request.getProfileImage()) {
-            case 1:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit1.png";
-                break;
-            case 2:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit2.png";
-                break;
-            case 3:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit3.png";
-                break;
-            case 4:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit4.png";
-                break;
-            case 5:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit5.png";
-                break;
-            default:
-                profileImageUrl = "https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit1.png";
-        }
-
         return Member.builder()
                 .appId(request.getAppId())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -41,7 +19,7 @@ public class MemberConverter {
                 .birth(request.getBirth())
                 .gender(gender)
                 .disabilityType(request.getDisabilityType())
-                .profileImageUrl(profileImageUrl)
+                .profileImageUrl("https://umc-hack-demo-bucket.s3.ap-northeast-2.amazonaws.com/rabbit1.png")
                 .mileage(0)
                 .build();
     }

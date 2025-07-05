@@ -19,6 +19,15 @@ public class AuthResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class UploadResponseDTO {
+        private Long userId;
+        private String verificationImageUrl;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class DuplicateCheckResponseDTO {
         private Boolean isAvailable;
         private String message;

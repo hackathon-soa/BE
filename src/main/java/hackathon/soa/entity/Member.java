@@ -54,6 +54,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false, name = "profile_image_url", columnDefinition = "varchar(255)")
     private String profileImageUrl;
 
+    @Column(nullable = true, name = "verification_image_url", columnDefinition = "varchar(255)")
+    private String verificationImageUrl;
+
     @Column(nullable = false, name = "mileage", columnDefinition = "int")
     private Integer mileage;
 
@@ -78,4 +81,8 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> courses = new ArrayList<>();
+
+    public void updateVerificationImageUrl(String verificationImageUrl) {
+        this.verificationImageUrl = verificationImageUrl;
+    }
 }

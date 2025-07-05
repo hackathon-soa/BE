@@ -3,15 +3,20 @@ package hackathon.soa.domain.auth;
 import hackathon.soa.common.JwtUtil;
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.AuthHandler;
+import hackathon.soa.config.AmazonConfig;
 import hackathon.soa.domain.auth.dto.AuthRequestDTO;
 import hackathon.soa.domain.auth.dto.AuthResponseDTO;
 import hackathon.soa.domain.member.MemberConverter;
 import hackathon.soa.domain.member.MemberRepository;
+import hackathon.soa.domain.s3.AmazonS3Manager;
 import hackathon.soa.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -21,6 +26,8 @@ public class AuthService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final AmazonS3Manager amazonS3Manager;
+    private final AmazonConfig amazonConfig;
 
     public AuthResponseDTO.SignupResponseDTO register(AuthRequestDTO.SignupRequestDTO request) {
         // 1) 아이디 중복 체크
@@ -68,5 +75,32 @@ public class AuthService {
 
         // 45) 응답 DTO 생성
         return AuthConverter.toLoginResponseDTO(member, accessToken);
+    }
+
+    public AuthResponseDTO.UploadResponseDTO uploadVerification(Long memberId, MultipartFile file) {
+        // 1) Member 조회
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다: " + memberId));
+
+
+        // 2) 파일명 생성
+        String keyName = generateVerificationImageKeyName(file.getOriginalFilename());
+
+
+        // 3) S3에 업로드
+        String imageUrl = amazonS3Manager.uploadFile(keyName, file);
+
+
+        // 4) Member의 verificationImageUrl 업데이트
+        member.updateVerificationImageUrl(imageUrl);
+
+
+        // 5) 응답 DTO 생성
+        return AuthConverter.toUploadResponseDTO(member, imageUrl);
+    }
+
+    private String generateVerificationImageKeyName(String originalFileName) {
+        String ext = originalFileName.substring(originalFileName.lastIndexOf(".")); // .jpg, .png 등
+        return amazonConfig.getVerificationPath() + "/" + UUID.randomUUID() + ext; // verification/uuid.jpg
     }
 }
