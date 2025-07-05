@@ -19,4 +19,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("select c from Course c where :targetDate between c.startTime and c.endTime")
     List<Course> findAllByDateBetween(@Param("targetDate") LocalDateTime targetDate);
+
+
 }

@@ -3,7 +3,7 @@ package hackathon.soa.domain.segment;
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.CourseHandler;
 import hackathon.soa.common.apiPayload.exception.SegmentHandler;
-import hackathon.soa.domain.course.CourseRepository;
+import hackathon.soa.domain.course.repository.CourseRepository;
 import hackathon.soa.domain.segment.dto.SegmentResponseDTO;
 import hackathon.soa.domain.segment.repository.CourseSegmentRepository;
 import hackathon.soa.domain.segment.repository.MoveSegmentRepository;
