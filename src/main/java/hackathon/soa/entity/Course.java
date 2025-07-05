@@ -42,7 +42,7 @@ public class Course extends BaseEntity {
     private CourseStatus status;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<CourseTravelStyle> courseTravelStyle;
+    private List<CourseTravelStyle> courseTravelStyle = new ArrayList<>();
 
     @Column(nullable = false, name = "start_time", columnDefinition = "datetime")
     private LocalDateTime startTime;
@@ -52,5 +52,9 @@ public class Course extends BaseEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CourseSegment> courseSegments = new ArrayList<>();
+
 
 }
