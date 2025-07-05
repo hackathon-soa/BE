@@ -1,0 +1,48 @@
+package hackathon.soa.domain.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "member")
+@NoArgsConstructor
+@Getter
+@Builder
+@AllArgsConstructor
+public class Course extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, name = "title", columnDefinition = "varchar(100)")
+    private String title;
+
+    @Column(nullable = false, name = "region", columnDefinition = "varchar(100)")
+    private String region;
+
+    @Column(nullable = false, name = "description", columnDefinition = "text")
+    private String description;
+
+    @Column(nullable = false, name = "preferred_gender", columnDefinition = "varchar(100)")
+    private Gender preferredGender;
+
+    @Column(nullable = false, name = "status", columnDefinition = "varchar(100)")
+    @Enumerated(EnumType.STRING)
+    private CourseStatus status;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<CourseTravelStyle> courseTravelStyle;
+
+    @Column(nullable = false, name = "start_time", columnDefinition = "datetime")
+    private LocalDateTime startTime;
+
+    @Column(nullable = false, name = "end_time", columnDefinition = "datetime")
+    private LocalDateTime endTime;
+}
