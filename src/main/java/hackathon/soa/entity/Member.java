@@ -38,26 +38,20 @@ public class Member extends BaseEntity {
     private String phoneNumber;
 
     @Column(nullable = false, name = "birth", columnDefinition = "date")
-    private LocalDate birth;
+    private String birth;
 
     @Column(nullable = false, name = "gender", columnDefinition = "varchar(100)")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false, name = "address", columnDefinition = "varchar(100)")
-    private String address;
-
     @Column(nullable = false, name = "disability_type", columnDefinition = "varchar(100)")
     private String disabilityType;
-
-    @Column(nullable = false, name = "disability", columnDefinition = "tinyint")
-    private Boolean disability;
 
     @Column(nullable = false, name = "temperature", columnDefinition = "double")
     @Builder.Default
     private Double temperature = 36.5;
 
-    @Column(nullable = false, name = "profile_imgage_url", columnDefinition = "varchar(255)")
+    @Column(nullable = false, name = "profile_image_url", columnDefinition = "varchar(255)")
     private String profileImageUrl;
 
     @Column(nullable = false, name = "mileage", columnDefinition = "int")
@@ -77,6 +71,6 @@ public class Member extends BaseEntity {
     private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
 }
