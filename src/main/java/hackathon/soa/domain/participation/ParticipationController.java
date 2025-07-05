@@ -3,6 +3,7 @@ package hackathon.soa.domain.participation;
 import hackathon.soa.common.JwtUser;
 import hackathon.soa.common.apiPayload.ApiResponse;
 import hackathon.soa.domain.search.dto.SearchResponseDTO;
+import hackathon.soa.entity.SegmentParticipationStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,20 @@ public class ParticipationController {
             @PathVariable Long segmentId
     ) {
         participationService.registerStaySegment(memberId, segmentId);
+        return ApiResponse.onSuccess();
+    }
+
+    @PatchMapping("/segments/{participationId}/approve")
+    @Operation(summary = "동행 수락 API", description = "신청자를 수락하여 상태를 APPROVED로 변경")
+    public ApiResponse<?> approveParticipation(@PathVariable Long participationId) {
+        participationService.updateStatus(participationId, SegmentParticipationStatus.APPROVED);
+        return ApiResponse.onSuccess();
+    }
+
+    @PatchMapping("/segments/{participationId}/reject")
+    @Operation(summary = "동행 거절 API", description = "신청자를 거절하여 상태를 REJECTED로 변경")
+    public ApiResponse<?> rejectParticipation(@PathVariable Long participationId) {
+        participationService.updateStatus(participationId, SegmentParticipationStatus.REJECTED);
         return ApiResponse.onSuccess();
     }
 

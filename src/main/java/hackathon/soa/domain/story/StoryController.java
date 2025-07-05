@@ -1,5 +1,6 @@
 package hackathon.soa.domain.story;
 
+import hackathon.soa.common.JwtUser;
 import hackathon.soa.common.apiPayload.ApiResponse;
 import hackathon.soa.domain.story.dto.StoryRequestDTO;
 import hackathon.soa.domain.story.dto.StoryResponseDTO;
@@ -24,15 +25,14 @@ public class StoryController {
     private final TestService testService;
     private final StoryService storyService;
 
-    private final Long userId = 1L;
-
     @Operation(summary = "스토리 이미지 업로드", description = "MultipartFile로 전달된 이미지를 S3에 업로드하고 URL을 반환합니다.")
     @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> uploadImage(
+            @Parameter(hidden = true) @JwtUser Long memberId,
             @Parameter(description = "업로드할 이미지 파일", required = true)
             @RequestPart("image") MultipartFile image) {
 
-        String url = testService.uploadTestImage(image, userId);
+        String url = testService.uploadTestImage(image, memberId);
         return ApiResponse.onSuccess(url);
     }
 
