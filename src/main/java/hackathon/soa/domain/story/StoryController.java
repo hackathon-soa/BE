@@ -35,6 +35,7 @@ public class StoryController {
         String url = testService.uploadTestImage(image, userId);
         return ApiResponse.onSuccess(url);
     }
+
     @Operation(summary = "스토리 목록 조회", description = "스토리 목록을 10개씩 페이지네이션으로 반환합니다.")
     @GetMapping
     public ApiResponse<Page<StoryResponseDTO.StoryListDTO>> getStoryList(

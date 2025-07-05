@@ -2,14 +2,13 @@ package hackathon.soa.domain.home;
 
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.GeneralException;
-import hackathon.soa.domain.auth.course.CourseRepository;
+import hackathon.soa.domain.course.CourseRepository;
 import hackathon.soa.domain.home.dto.HomeResponseDTO;
 import hackathon.soa.entity.Course;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

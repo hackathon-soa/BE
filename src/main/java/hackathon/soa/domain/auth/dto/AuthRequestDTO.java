@@ -47,9 +47,6 @@ public class AuthRequestDTO {
         @NotBlank(message = "장애 유형은 필수입니다")
         @Pattern(regexp = "^\\[.*\\]$", message = "장애 유형은 JSON 배열 형식이어야 합니다")
         private String disabilityType;
-
-        @NotNull(message = "프로필 이미지는 필수입니다")
-        private Integer profileImage;
     }
 
     @Builder
