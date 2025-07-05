@@ -28,4 +28,12 @@ public class TestResponseDTO {
     public static class ExceptionDTO{
         Integer flag;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class JWTResponseDTO {
+        private Long memberId;
+    }
 }

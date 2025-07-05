@@ -1,8 +1,7 @@
 package hackathon.soa.domain.test;
 
 import hackathon.soa.common.apiPayload.ApiResponse;
-import hackathon.soa.domain.s3.AmazonS3Manager;
-import hackathon.soa.domain.s3.UuidRepository;
+import hackathon.soa.common.JwtUser;
 import hackathon.soa.domain.test.dto.TestResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,5 +33,14 @@ public class TestController {
 
         String url = testService.uploadTestImage(image);
         return ApiResponse.onSuccess(url);
+    }
+
+    @GetMapping("/Jwt")
+    @Operation(summary = "JWT 토큰 테스트", description = "JWT 토큰을 통해 현재 사용자의 memberId를 반환합니다.")
+    public ApiResponse<TestResponseDTO.JWTResponseDTO> testJwtToken(
+            @JwtUser Long memberId
+    ) {
+        TestResponseDTO.JWTResponseDTO response = TestConverter.toJWTTestDTO(memberId);
+        return ApiResponse.onSuccess(response);
     }
 }

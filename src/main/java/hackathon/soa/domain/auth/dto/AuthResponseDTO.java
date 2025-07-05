@@ -23,4 +23,13 @@ public class AuthResponseDTO {
         private Boolean isAvailable;
         private String message;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LoginResponseDTO {
+        private Long memberId;
+        private String accessToken;
+    }
 }
