@@ -12,4 +12,14 @@ public class StoryResponseDTO {
     public static class ImageUploadResultDTO {
         private String imageUrl;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class StoryListDTO {
+        private Long memberId;
+        private String nickname;
+        private String profileImageUrl;
+        private String imageUrl;
+    }
 }

@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class StoryController {
 
     private final TestService testService;
+    private final StoryService storyService;
 
     private final Long userId = 1L;
 
@@ -30,6 +34,16 @@ public class StoryController {
 
         String url = testService.uploadTestImage(image, userId);
         return ApiResponse.onSuccess(url);
+    }
+    @Operation(summary = "스토리 목록 조회", description = "스토리 목록을 10개씩 페이지네이션으로 반환합니다.")
+    @GetMapping
+    public ApiResponse<Page<StoryResponseDTO.StoryListDTO>> getStoryList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<StoryResponseDTO.StoryListDTO> stories = storyService.getStories(pageable);
+        return ApiResponse.onSuccess(stories);
     }
 
 }

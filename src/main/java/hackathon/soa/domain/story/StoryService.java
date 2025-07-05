@@ -2,9 +2,14 @@ package hackathon.soa.domain.story;
 
 import hackathon.soa.config.AmazonConfig;
 import hackathon.soa.domain.s3.AmazonS3Manager;
+import hackathon.soa.domain.story.dto.StoryResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 
 import java.util.UUID;
 
@@ -26,6 +31,18 @@ public class StoryService {
     private String generateTestImageKeyName(String originalFileName) {
         String ext = originalFileName.substring(originalFileName.lastIndexOf(".")); // .jpg, .png 등
         return amazonConfig.getTestsPath() + "/" + UUID.randomUUID() + ext; // tests/uuid.jpg
+    }
+
+    private final StoryRepository storyRepository;
+
+    public Page<StoryResponseDTO.StoryListDTO> getStories(Pageable pageable) {
+        return storyRepository.findAll(pageable)
+                .map(story -> StoryResponseDTO.StoryListDTO.builder()
+                        .memberId(story.getMember().getId())
+                        .nickname(story.getMember().getNickname())
+                        .profileImageUrl(story.getMember().getProfileImageUrl())
+                        .imageUrl(story.getImageUrl())
+                        .build());
     }
 
 }
