@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.text.DecimalFormat;
 
 @Entity
-@Table(name = "stay_segment")
+@Table(name = "move_segment")
 @NoArgsConstructor
 @Getter
 @Builder

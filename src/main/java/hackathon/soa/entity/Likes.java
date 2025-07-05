@@ -7,12 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "course_segment")
+@Table(name = "likes")
 @NoArgsConstructor
 @Getter
 @Builder
 @AllArgsConstructor
-public class Like extends BaseEntity {
+public class Likes extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
