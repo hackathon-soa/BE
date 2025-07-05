@@ -41,7 +41,7 @@ public class SegmentService {
 
         boolean isOwner = course.getMember().getId().equals(memberId);
 
-        // 2. 코스 세그먼트들을 순서대로 조회
+        // 2. 코스 세그먼트들을 순서대로 조회함
         List<CourseSegment> courseSegments = courseSegmentRepository.findByCourse_IdOrderBySegmentOrder(courseId);
 
         if (courseSegments.isEmpty()) {
