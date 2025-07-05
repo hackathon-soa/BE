@@ -1,7 +1,6 @@
 package hackathon.soa.entity;
 
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,8 +15,8 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
 
     @CreatedDate
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; // 생성 일자
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt; // 수정 일자
 }
