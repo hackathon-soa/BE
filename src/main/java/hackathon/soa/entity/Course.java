@@ -28,8 +28,11 @@ public class Course extends BaseEntity {
     @Column(nullable = false, name = "region", columnDefinition = "varchar(100)")
     private String region;
 
-    @Column(nullable = false, name = "description", columnDefinition = "text")
-    private String description;
+    @Column(nullable = false, name = "intersts", columnDefinition = "text")
+    private String interests;
+
+    @Column(nullable = false, name = "special_note", columnDefinition = "text")
+    private String specialNote;
 
     @Column(nullable = false, name = "preferred_gender", columnDefinition = "varchar(100)")
     private Gender preferredGender;
