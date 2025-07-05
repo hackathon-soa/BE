@@ -32,7 +32,7 @@ public class CourseRequestDTO {
     public static class SegmentDTO {
         private LocalDateTime startTime;
         private LocalDateTime endTime;
-        private boolean isMoving;
+        private boolean moving;
         private String movementType;       // 자동차, 도보 등 (이동일 경우)
         private double movementDistanceKm; // 이동일 경우
         private String locationName;       // 장소일 경우

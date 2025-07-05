@@ -33,9 +33,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()  // 로그인, 회원가입 허용
                         .requestMatchers("/api/home/**", "/api/stories").permitAll()  // 홈화면 허용
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()  // Swagger 허용
+                        .requestMatchers("/courses/**").permitAll()
+                        .requestMatchers("/courses").permitAll()
+                        .requestMatchers("/api/courses/**").permitAll()
                         .anyRequest().authenticated()  // 그 외 모든 요청은 인증 필요
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }

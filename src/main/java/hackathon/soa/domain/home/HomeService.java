@@ -2,7 +2,7 @@ package hackathon.soa.domain.home;
 
 import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.GeneralException;
-import hackathon.soa.domain.auth.course.CourseRepository;
+import hackathon.soa.domain.course.repository.CourseRepository;
 import hackathon.soa.domain.home.dto.HomeResponseDTO;
 import hackathon.soa.entity.Course;
 import jakarta.transaction.Transactional;

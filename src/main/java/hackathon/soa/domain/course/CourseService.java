@@ -2,6 +2,7 @@ package hackathon.soa.domain.course;
 
 import hackathon.soa.domain.course.dto.CourseRequestDTO;
 import hackathon.soa.domain.course.repository.*;
+import hackathon.soa.domain.member.MemberRepository;
 import hackathon.soa.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,13 @@ public class CourseService {
     private final MoveSegmentRepository moveSegmentRepository;
     private final StaySegmentRepository staySegmentRepository;
     private final CourseTravelStyleRepository courseTravelStyleRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public Long createCourse(CourseRequestDTO.CreateCourseRequest request,Long userId) {
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다: " + userId));
+
         // 1. Course 생성
         Course course = Course.builder()
                 .title(request.getTitle())
@@ -30,6 +35,7 @@ public class CourseService {
                 .specialNote(request.getSpecialNote())
                 .preferredGender(request.getPreferredGender())
                 .status(CourseStatus.IN_PROGRESS)
+                .member(member)
                 .build();
         courseRepository.save(course);
 
