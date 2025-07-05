@@ -20,7 +20,7 @@ public class TravelStyle extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, name = "name", columnDefinition = "varchar(1001-")
+    @Column(nullable = false, name = "name", columnDefinition = "varchar(100)")
     private String name;
 
     @OneToMany(mappedBy = "travelStyle", cascade = CascadeType.ALL)
