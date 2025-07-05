@@ -1,4 +1,4 @@
-package hackathon.soa.domain.entity;
+package hackathon.soa.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

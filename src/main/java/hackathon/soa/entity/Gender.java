@@ -1,4 +1,4 @@
-package hackathon.soa.domain.entity;
+package hackathon.soa.entity;
 
 public enum Gender {
     MALE, FEMALE
