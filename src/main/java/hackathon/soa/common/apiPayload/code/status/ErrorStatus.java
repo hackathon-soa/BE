@@ -18,7 +18,7 @@ public enum ErrorStatus implements BaseErrorCode {
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
 
     // 사용자 관련
-    ID_DUPLICATED(HttpStatus.CONFLICT, "AUTH4002", "중복된 아이디입니다."),
+    ID_DUPLICATED(HttpStatus.CONFLICT, "AUTH4001", "이미 사용중인 아이디입니다."),
     ;
 
 
