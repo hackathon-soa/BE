@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TravelStyle extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, name = "name", columnDefinition = "varchar(100)")

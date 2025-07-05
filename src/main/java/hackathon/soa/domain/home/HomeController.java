@@ -29,4 +29,17 @@ public class HomeController {
 
         return ApiResponse.onSuccess(result);
     }
+
+    @PostMapping("/my-courses/two")
+    @Operation(
+            summary = "나의 여행 코스 두개 조회",
+            description = "현재 로그인 한 사용자가 생성한 여행 코스 상단 두개를 조회합니다."
+    )
+    public ApiResponse<HomeResponseDTO.MyCoursesResponseDTO> getMyTwoCourses(
+            @Parameter(hidden = true) @JwtUser Long memberId
+    ) {
+        HomeResponseDTO.MyCoursesResponseDTO result = homeService.getMyTwoCourses(memberId);
+
+        return ApiResponse.onSuccess(result);
+    }
 }

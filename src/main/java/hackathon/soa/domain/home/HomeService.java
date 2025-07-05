@@ -41,4 +41,28 @@ public class HomeService {
         return HomeConverter.toMyCoursesResponseDTO(sortedCourses);
 
     }
+
+    public HomeResponseDTO.MyCoursesResponseDTO getMyTwoCourses(Long memberId) {
+        List<Course> courses = courseRepository.findAllByMemberId(memberId);
+
+        if (courses.isEmpty()) {
+            throw new GeneralException(ErrorStatus.NOT_FOUND_COURSE);
+        }
+
+        List<Course> sortedCourses = courses.stream()
+                .sorted((c1, c2) -> {
+                    int likes1 = courseRepository.countLikesByCourseId(c1.getId());
+                    int likes2 = courseRepository.countLikesByCourseId(c2.getId());
+
+                    if (likes1 != likes2) {
+                        return Integer.compare(likes2, likes1);
+                    } else {
+                        return c2.getCreatedAt().compareTo(c1.getCreatedAt());
+                    }})
+                .limit(2)
+                .collect(Collectors.toList());
+
+        return HomeConverter.toMyCoursesResponseDTO(sortedCourses);
+
+    }
 }
