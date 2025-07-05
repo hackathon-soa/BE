@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "stay_segment")
 @NoArgsConstructor
@@ -28,5 +31,7 @@ public class StaySegment extends BaseEntity {
     @Column(nullable = false, name = "location_address", columnDefinition = "varchar(255)")
     private String locationAddress;
 
+    @OneToMany(mappedBy = "staySegment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SegmentParticipation> segmentParticipations = new ArrayList<>();
 
 }

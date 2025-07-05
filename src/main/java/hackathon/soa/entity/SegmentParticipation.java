@@ -24,7 +24,7 @@ public class SegmentParticipation extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_segment_id")
-    private CourseSegment courseSegment;
+    private StaySegment staySegment;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "course_segment_status", columnDefinition = "varchar(100)")
