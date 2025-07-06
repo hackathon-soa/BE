@@ -45,12 +45,6 @@ public class AmazonConfig {
     @Value("verification")
     private String verificationPath; // S3 내 테스트 관련 파일 저장 디렉토리 경로 (폴더명: tests)
 
-    //!! s3에 어떤 디렉토리를 만들고, 그안에 뭘 저장하고 싶다면!!
-    //1. aws 콘솔에서 s3 디렉토리 생성
-    //2. AmazonConfig에 private String ~~Path 변수 생성
-    //3. AmazonS3Manager에 generate~~KeyName() 메서드 추가
-    //4. 서비스 계층에서 사용.
-
     /**
      * AWS 인증 정보를 설정하는 초기화 메서드.
      * Spring이 이 클래스를 생성한 후 자동으로 호출되며,
