@@ -5,6 +5,7 @@ import hackathon.soa.common.apiPayload.exception.AuthHandler;
 import hackathon.soa.common.apiPayload.exception.GeneralException;
 import hackathon.soa.domain.course.repository.CourseRepository;
 import hackathon.soa.domain.member.MemberRepository;
+import hackathon.soa.domain.participation.dto.ParticipationResponseDTO;
 import hackathon.soa.domain.segment.repository.CourseSegmentRepository;
 import hackathon.soa.domain.segment.repository.StaySegmentRepository;
 import hackathon.soa.entity.*;
@@ -13,6 +14,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -63,6 +67,30 @@ public class ParticipationService {
                 .orElseThrow(() -> new GeneralException(ErrorStatus.SEGMENT_NOT_FOUND)); // ❗ 더 구체적인 에러로 교체
 
         participation.updateStatus(status);
+    }
+
+    public ParticipationResponseDTO.ApplicantsResponsesDTO getApplicants (Long segmentId) {
+        StaySegment segment = staySegmentRepository.findById(segmentId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.NOT_FOUND_SEGMENT));
+
+        List<SegmentParticipation> segmentParticipations = segmentParticipationRepository.findAllByStaySegment(segment);
+
+        if(segmentParticipations.isEmpty()) {
+            throw new GeneralException(ErrorStatus.NOT_FOUND_SEGMENT_APPLICANTS);
+        }
+
+        List<ParticipationResponseDTO.ApplicantsResponseDTO> dtos = segmentParticipations.stream()
+                .map(applicants -> {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate birthDate = LocalDate.parse(applicants.getMember().getBirth(), formatter);
+
+                    Integer age = Period.between(birthDate, LocalDate.now()).getYears();
+
+                    return ParticipationConverter.toApplicantsResponseDTO(applicants.getMember(), age);
+                })
+                .collect(Collectors.toList());
+
+        return ParticipationConverter.toApplicantsResponsesDTO(dtos);
     }
 
 }

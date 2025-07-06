@@ -21,6 +21,7 @@ public class SegmentResponseDTO {
     public static class CourseDetailResponseDTO {
         private Long courseId;
         private Boolean isMine; // 해당 멤버가 코스 작성자인지 여부
+        private Boolean canApplyAll; // 전체 신청 가능 여부 (모든 장소 세그먼트에 참여하지 않았는지)
         private SearchResponseDTO.SearchCourseResponseDTO courseInfo; // 코스 기본 정보 및 좋아요 정보
         private List<SegmentDetailDTO> segments;
     }
@@ -76,7 +77,6 @@ public class SegmentResponseDTO {
                     .build();
         }
     }
-
 
     @Builder
     @Getter
