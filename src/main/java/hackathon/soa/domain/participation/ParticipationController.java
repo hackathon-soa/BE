@@ -2,6 +2,7 @@ package hackathon.soa.domain.participation;
 
 import hackathon.soa.common.JwtUser;
 import hackathon.soa.common.apiPayload.ApiResponse;
+import hackathon.soa.domain.participation.dto.ParticipationResponseDTO;
 import hackathon.soa.domain.search.dto.SearchResponseDTO;
 import hackathon.soa.entity.SegmentParticipationStatus;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,6 +55,19 @@ public class ParticipationController {
     ) {
         participationService.registerEntireSegment(memberId, courseId);
         return ApiResponse.onSuccess();
+    }
+
+    @GetMapping("/segments/{segmentId}/applicants")
+    @Operation(
+            summary = "해당 segment에 동행 신청한 사람들 list (미응답인 경우만) 띄워주는 api",
+            description = "segment에 동행 신청한 사람들을 보여주는 api입니다. 상태가 미응답인 경우만 해당합니다."
+    )
+    public ApiResponse<ParticipationResponseDTO.ApplicantsResponsesDTO> getApplicants (
+            @Parameter(hidden = true) @JwtUser Long memberId,
+            @PathVariable Long segmentId
+    ) {
+        ParticipationResponseDTO.ApplicantsResponsesDTO result = participationService.getApplicants(segmentId);
+        return ApiResponse.onSuccess(result);
     }
 
 

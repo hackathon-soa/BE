@@ -57,8 +57,13 @@ public class Member extends BaseEntity {
     @Column(nullable = true, name = "verification_image_url", columnDefinition = "varchar(255)")
     private String verificationImageUrl;
 
+    @Column(nullable = true, name = "volunteer_hours", columnDefinition = "int")
+    @Builder.Default
+    private Integer volunteerHours = 0;
+
     @Column(nullable = false, name = "mileage", columnDefinition = "int")
-    private Integer mileage;
+    @Builder.Default
+    private Integer mileage = 0;
 
     @Column(nullable = false, name = "is_verified", columnDefinition = "tinyint")
     @Builder.Default
