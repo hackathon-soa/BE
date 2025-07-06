@@ -8,13 +8,12 @@ import hackathon.soa.domain.member.MemberRepository;
 import hackathon.soa.domain.segment.repository.CourseSegmentRepository;
 import hackathon.soa.domain.segment.repository.StaySegmentRepository;
 import hackathon.soa.entity.*;
+import hackathon.soa.entity.enums.SegmentParticipationStatus;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

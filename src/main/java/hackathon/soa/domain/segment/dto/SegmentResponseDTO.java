@@ -1,9 +1,8 @@
 package hackathon.soa.domain.segment.dto;
 
 import hackathon.soa.domain.search.dto.SearchResponseDTO;
-import hackathon.soa.entity.CourseSegment;
 import hackathon.soa.entity.MoveSegment;
-import hackathon.soa.entity.MovementType;
+import hackathon.soa.entity.enums.MovementType;
 import hackathon.soa.entity.StaySegment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
-
-import static hackathon.soa.domain.segment.SegmentConverter.toMoveSegmentDTO;
 
 public class SegmentResponseDTO {
 

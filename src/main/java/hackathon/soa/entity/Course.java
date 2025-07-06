@@ -1,5 +1,8 @@
 package hackathon.soa.entity;
 
+import hackathon.soa.entity.common.BaseEntity;
+import hackathon.soa.entity.enums.CourseStatus;
+import hackathon.soa.entity.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

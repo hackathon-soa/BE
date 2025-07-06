@@ -1,5 +1,6 @@
 package hackathon.soa.entity;
 
+import hackathon.soa.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

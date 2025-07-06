@@ -2,7 +2,7 @@ package hackathon.soa.domain.participation;
 
 import hackathon.soa.entity.Member;
 import hackathon.soa.entity.SegmentParticipation;
-import hackathon.soa.entity.SegmentParticipationStatus;
+import hackathon.soa.entity.enums.SegmentParticipationStatus;
 import hackathon.soa.entity.StaySegment;
 import lombok.experimental.UtilityClass;
 

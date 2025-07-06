@@ -4,6 +4,8 @@ import hackathon.soa.common.apiPayload.code.status.ErrorStatus;
 import hackathon.soa.common.apiPayload.exception.CourseHandler;
 import hackathon.soa.domain.course.dto.CourseRequestDTO;
 import hackathon.soa.entity.*;
+import hackathon.soa.entity.enums.CourseStatus;
+import hackathon.soa.entity.enums.MovementType;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
