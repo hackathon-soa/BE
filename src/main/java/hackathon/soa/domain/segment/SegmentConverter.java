@@ -16,12 +16,14 @@ public class SegmentConverter {
     public static SegmentResponseDTO.CourseDetailResponseDTO toCourseDetailResponseDTO(
             Long courseId, Boolean isOwner,
             SearchResponseDTO.SearchCourseResponseDTO courseInfo,
-            List<SegmentResponseDTO.SegmentDetailDTO> segments) {
+            List<SegmentResponseDTO.SegmentDetailDTO> segments,
+            Boolean canApplyAll) {
         return SegmentResponseDTO.CourseDetailResponseDTO.builder()
                 .courseId(courseId)
                 .isMine(isOwner)
                 .courseInfo(courseInfo)
                 .segments(segments)
+                .canApplyAll(canApplyAll)
                 .build();
     }
 

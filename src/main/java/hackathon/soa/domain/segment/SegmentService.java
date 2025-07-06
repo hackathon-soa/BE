@@ -58,8 +58,17 @@ public class SegmentService {
                 .map(segment -> buildSegmentDetail(segment, memberId))
                 .collect(Collectors.toList());
 
-        // 5. SegmentConverter를 사용하여 최종 응답 DTO 생성
-        return SegmentConverter.toCourseDetailResponseDTO(courseId, isOwner, courseInfo, segmentDetails);
+        // 5. 전체 신청 가능 여부 확인 (모든 장소 세그먼트에 참여하지 않았는지 확인)
+        boolean canApplyAll = false;
+        if (!isOwner) {
+            canApplyAll = segmentDetails.stream()
+                    .filter(segment -> "장소".equals(segment.getSegmentType()))
+                    .allMatch(segment -> segment.getStaySegment() != null &&
+                            !segment.getStaySegment().getIsParticipated());
+        }
+
+        // 6. SegmentConverter를 사용하여 최종 응답 DTO 생성
+        return SegmentConverter.toCourseDetailResponseDTO(courseId, isOwner, courseInfo, segmentDetails, canApplyAll);
     }
 
     private SegmentResponseDTO.SegmentDetailDTO buildSegmentDetail(CourseSegment courseSegment, Long memberId) {
