@@ -1,12 +1,12 @@
 package hackathon.soa.entity;
 
+import hackathon.soa.entity.common.BaseEntity;
+import hackathon.soa.entity.enums.MovementType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.text.DecimalFormat;
 
 @Entity
 @Table(name = "move_segment")

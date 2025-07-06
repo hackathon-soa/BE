@@ -1,6 +1,6 @@
 package hackathon.soa.domain.course.dto;
 
-import hackathon.soa.entity.Gender;
+import hackathon.soa.entity.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

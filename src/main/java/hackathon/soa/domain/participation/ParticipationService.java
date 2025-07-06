@@ -9,6 +9,7 @@ import hackathon.soa.domain.participation.dto.ParticipationResponseDTO;
 import hackathon.soa.domain.segment.repository.CourseSegmentRepository;
 import hackathon.soa.domain.segment.repository.StaySegmentRepository;
 import hackathon.soa.entity.*;
+import hackathon.soa.entity.enums.SegmentParticipationStatus;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,14 +35,12 @@ public class ParticipationService {
                 .orElseThrow(() -> new AuthHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
         StaySegment segment = staySegmentRepository.findById(segmentId)
-                        .orElseThrow(() -> new GeneralException(ErrorStatus.NOT_FOUND_SEGMENT));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.SEGMENT_NOT_FOUND)); // ❗ ErrorStatus 통일
 
-        segmentParticipationRepository.save(
-                SegmentParticipation.builder()
-                        .member(member)
-                        .staySegment(segment)
-                        .status(SegmentParticipationStatus.PENDING)
-                        .build());
+        SegmentParticipation participation = ParticipationConverter.toSegmentParticipation(
+                member, segment, SegmentParticipationStatus.PENDING
+        );
+        segmentParticipationRepository.save(participation);
     }
 
     public void registerEntireSegment(Long memberId, Long courseId) {
@@ -56,25 +53,18 @@ public class ParticipationService {
         List<CourseSegment> courseSegments = courseSegmentRepository.findAllByCourse(course);
 
         for (CourseSegment cs : courseSegments) {
-            Optional<StaySegment> optionalStaySegment = staySegmentRepository.findByCourseSegmentId(cs.getId());
-
-            if (optionalStaySegment.isEmpty()) {
-                continue;
-            }
-            StaySegment staySegment = optionalStaySegment.get();
-
-            segmentParticipationRepository.save(
-                    SegmentParticipation.builder()
-                            .member(member)
-                            .staySegment(staySegment)
-                            .status(SegmentParticipationStatus.PENDING)
-                            .build()
-            );
+            staySegmentRepository.findByCourseSegmentId(cs.getId()).ifPresent(staySegment -> {
+                SegmentParticipation participation = ParticipationConverter.toSegmentParticipation(
+                        member, staySegment, SegmentParticipationStatus.PENDING
+                );
+                segmentParticipationRepository.save(participation);
+            });
         }
     }
+
     public void updateStatus(Long participationId, SegmentParticipationStatus status) {
         SegmentParticipation participation = segmentParticipationRepository.findById(participationId)
-                .orElseThrow(() -> new GeneralException(ErrorStatus._INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.SEGMENT_NOT_FOUND)); // ❗ 더 구체적인 에러로 교체
 
         participation.updateStatus(status);
     }
@@ -102,4 +92,5 @@ public class ParticipationService {
 
         return ParticipationConverter.toApplicantsResponsesDTO(dtos);
     }
+
 }

@@ -1,7 +1,7 @@
 package hackathon.soa.domain.member;
 
 import hackathon.soa.domain.auth.dto.AuthRequestDTO;
-import hackathon.soa.entity.Gender;
+import hackathon.soa.entity.enums.Gender;
 import hackathon.soa.entity.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

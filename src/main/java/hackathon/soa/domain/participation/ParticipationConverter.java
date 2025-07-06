@@ -2,15 +2,25 @@ package hackathon.soa.domain.participation;
 
 import hackathon.soa.domain.participation.dto.ParticipationResponseDTO;
 import hackathon.soa.entity.Member;
+import hackathon.soa.entity.SegmentParticipation;
+import hackathon.soa.entity.StaySegment;
+import hackathon.soa.entity.enums.SegmentParticipationStatus;
+import lombok.experimental.UtilityClass;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@UtilityClass
 public class ParticipationConverter {
-    public static ParticipationResponseDTO.ApplicantsResponseDTO toApplicantsResponseDTO(Member member, Integer age) {
+
+    public SegmentParticipation toSegmentParticipation(Member member, StaySegment segment, SegmentParticipationStatus status) {
+        return SegmentParticipation.builder()
+                .member(member)
+                .staySegment(segment)
+                .status(status)
+                .build();
+    }
+
+    public ParticipationResponseDTO.ApplicantsResponseDTO toApplicantsResponseDTO(Member member, Integer age) {
         return ParticipationResponseDTO.ApplicantsResponseDTO.builder()
                 .nickname(member.getNickname())
                 .disabilityType(member.getDisabilityType())
@@ -22,9 +32,10 @@ public class ParticipationConverter {
                 .build();
     }
 
-    public static ParticipationResponseDTO.ApplicantsResponsesDTO toApplicantsResponsesDTO(List<ParticipationResponseDTO.ApplicantsResponseDTO> dtos) {
+    public ParticipationResponseDTO.ApplicantsResponsesDTO toApplicantsResponsesDTO(List<ParticipationResponseDTO.ApplicantsResponseDTO> dtos) {
         return ParticipationResponseDTO.ApplicantsResponsesDTO.builder()
                 .applicants(dtos)
                 .build();
     }
 }
+

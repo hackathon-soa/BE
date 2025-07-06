@@ -2,6 +2,7 @@ package hackathon.soa.domain.participation;
 
 import hackathon.soa.common.JwtUser;
 import hackathon.soa.common.apiPayload.ApiResponse;
+import hackathon.soa.entity.enums.SegmentParticipationStatus;
 import hackathon.soa.domain.participation.dto.ParticipationResponseDTO;
 import hackathon.soa.domain.search.dto.SearchResponseDTO;
 import hackathon.soa.entity.SegmentParticipationStatus;
@@ -69,6 +70,5 @@ public class ParticipationController {
         ParticipationResponseDTO.ApplicantsResponsesDTO result = participationService.getApplicants(segmentId);
         return ApiResponse.onSuccess(result);
     }
-
 
 }
