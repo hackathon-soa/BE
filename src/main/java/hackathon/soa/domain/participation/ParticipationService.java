@@ -27,65 +27,18 @@ public class ParticipationService {
     private final CourseSegmentRepository courseSegmentRepository;
     private final CourseRepository courseRepository;
 
-//    public void registerStaySegment(Long memberId, Long segmentId) {
-//        Member member = memberRepository.findById(memberId)
-//                .orElseThrow(() -> new AuthHandler(ErrorStatus.MEMBER_NOT_FOUND));
-//
-//        StaySegment segment = staySegmentRepository.findById(segmentId)
-//                        .orElseThrow(() -> new GeneralException(ErrorStatus.NOT_FOUND_SEGMENT));
-//
-//        segmentParticipationRepository.save(
-//                SegmentParticipation.builder()
-//                        .member(member)
-//                        .staySegment(segment)
-//                        .status(SegmentParticipationStatus.PENDING)
-//                        .build());
-//    }
-//
-//    public void registerEntireSegment(Long memberId, Long courseId) {
-//        Member member = memberRepository.findById(memberId)
-//                .orElseThrow(() -> new AuthHandler(ErrorStatus.MEMBER_NOT_FOUND));
-//
-//        Course course = courseRepository.findById(courseId)
-//                .orElseThrow(() -> new GeneralException(ErrorStatus.NOT_FOUND_COURSE));
-//
-//        List<CourseSegment> courseSegments = courseSegmentRepository.findAllByCourse(course);
-//
-//        for (CourseSegment cs : courseSegments) {
-//            Optional<StaySegment> optionalStaySegment = staySegmentRepository.findByCourseSegmentId(cs.getId());
-//
-//            if (optionalStaySegment.isEmpty()) {
-//                continue;
-//            }
-//            StaySegment staySegment = optionalStaySegment.get();
-//
-//            segmentParticipationRepository.save(
-//                    SegmentParticipation.builder()
-//                            .member(member)
-//                            .staySegment(staySegment)
-//                            .status(SegmentParticipationStatus.PENDING)
-//                            .build()
-//            );
-//        }
-//    }
-//    public void updateStatus(Long participationId, SegmentParticipationStatus status) {
-//        SegmentParticipation participation = segmentParticipationRepository.findById(participationId)
-//                .orElseThrow(() -> new GeneralException(ErrorStatus._INTERNAL_SERVER_ERROR));
-//
-//        participation.updateStatus(status);
-//    }
-public void registerStaySegment(Long memberId, Long segmentId) {
-    Member member = memberRepository.findById(memberId)
-            .orElseThrow(() -> new AuthHandler(ErrorStatus.MEMBER_NOT_FOUND));
+    public void registerStaySegment(Long memberId, Long segmentId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new AuthHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
-    StaySegment segment = staySegmentRepository.findById(segmentId)
-            .orElseThrow(() -> new GeneralException(ErrorStatus.SEGMENT_NOT_FOUND)); // ❗ ErrorStatus 통일
+        StaySegment segment = staySegmentRepository.findById(segmentId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.SEGMENT_NOT_FOUND)); // ❗ ErrorStatus 통일
 
-    SegmentParticipation participation = ParticipationConverter.toSegmentParticipation(
-            member, segment, SegmentParticipationStatus.PENDING
-    );
-    segmentParticipationRepository.save(participation);
-}
+        SegmentParticipation participation = ParticipationConverter.toSegmentParticipation(
+                member, segment, SegmentParticipationStatus.PENDING
+        );
+        segmentParticipationRepository.save(participation);
+    }
 
     public void registerEntireSegment(Long memberId, Long courseId) {
         Member member = memberRepository.findById(memberId)
